@@ -31,7 +31,7 @@
 #    }
 #
 define dotnet(
-  Pattern[/^(3.5|4\.0|4\.5(\.\d)?)$/] $version,
+  Pattern[/^(3.5|4\.0|4\.[56](\.\d)?)$/] $version,
   Enum['present', 'absent'] $ensure = 'present',
   $package_dir                      = ''
 ) {
@@ -52,7 +52,7 @@ define dotnet(
         default: { $type = 'err' err("dotnet ${version} is not support on this version of windows") }
       }
     }
-    /4\.5(\.\d)?/: {
+    /4\.[56](\.\d)?/: {
       case $::operatingsystemversion {
         /^Windows.(Server)?.?(2008|2012|Vista|7|8.*).?(R2)?.*/: { $type = 'package' }
         default: { $type = 'err' err("dotnet ${version} is not support on this version of windows") }
